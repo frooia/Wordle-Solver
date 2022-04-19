@@ -127,7 +127,7 @@ Trie::TrieNode* Trie::getNode()
     return current;
 }
 
-void Trie::updateSets(pair<char, int> feedback[])
+void Trie::updateSets(vector<pair<char, int>> feedback)
 {
     for (int i = 0; i < wordLength; i++)
     {
@@ -175,7 +175,7 @@ string Trie::guessNoFeedback()
     return findWord();
 }
 
-string Trie::generateGuess(pair<char, int> feedback[])
+string Trie::generateGuess(vector<pair<char, int>> feedback)
 {
     updateSets(feedback);
     return findWord();

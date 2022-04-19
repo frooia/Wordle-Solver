@@ -17,7 +17,7 @@ public:
         bool endOfWord;
     };
     string guessNoFeedback(); // use for first guess or invalid guess (no feedback to give)
-    string generateGuess(pair<char, int> feedback[]); // use when have feedback
+    string generateGuess(vector<pair<char, int>> feedback); // use when have feedback
     void remove(string key); // use if invalid guess - remove word from trie
 private:
     // attributes
@@ -33,7 +33,7 @@ private:
     TrieNode* removeHelper(TrieNode* current, string key, int depth = 0); // remove node if considered invalid guess
     void insert(string key); // insert node into trie
     TrieNode* getNode(); // make new node
-    void updateSets(pair<char, int> feedback[]); // update position sets according to feedback
+    void updateSets(vector<pair<char, int>> feedback); // update position sets according to feedback
     string findWord(); // make best guess of word
     string findWordHelper(TrieNode* current, char str[], int level); // helper to make guess
 };
