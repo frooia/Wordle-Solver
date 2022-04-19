@@ -287,8 +287,6 @@ string Trie::findWordHelper(TrieNode* current, char str[], int level)
                 // if found valid word and that word contains all the previously marked yellow and green letters, return it
                 if (guess != "return" && containsAllLeters(guess))
                     return guess;
-                else if (guess != "return" && containsAllLeters(guess))
-                    return guess;
             }
         }
     }
