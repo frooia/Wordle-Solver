@@ -1,6 +1,7 @@
 //
 // Created by Lydia Chung on 4/19/22.
 //
+
 #include <unordered_set>
 #include <vector>
 #include <string>
@@ -12,13 +13,13 @@ class Set {
 private:
     unordered_set<string> fullSet;
     int length;
-
+    constexpr static const float COMMON_WORD_RATE = 0.8;
 public:
     explicit Set(int wordLength);
     void generate(const vector<string> &wordList);
     void update(const vector<pair<char, int>>& feedback);
-    string guess();
-
+    string randomGuess();
+    string nonRandomGuess(const unordered_set<string>& commonWords);
 };
 
 /**
@@ -94,6 +95,37 @@ void Set::update(const vector<pair<char, int>> &feedback) {
  * Generates a random word guess from fullSet
  * @return
  */
-string Set::guess() {
-    return *fullSet.begin();
+string Set::randomGuess() {
+    int rand = (int)(random() % fullSet.size());
+    auto it = fullSet.begin();
+    advance(it, rand);
+    return *it;
+}
+
+/**
+ * Generates a common or uncommon word guess based on a likelihood constant
+ * @param commonWords
+ * @return
+ */
+string Set::nonRandomGuess(const unordered_set<string> &commonWords) {
+    // Separate fullSet into common and uncommon words
+    unordered_set<string> commonViable, uncommonViable;
+    for (auto & word : fullSet) {
+        if (commonWords.find(word) != commonWords.end())
+            commonViable.insert(word);
+        else
+            uncommonViable.insert(word);
+    }
+    // Generate a random guess from the chosen set
+    int rand;
+    unordered_set<string>::iterator it;
+    if (random() % 100 < (int)(COMMON_WORD_RATE * 100)) {
+        rand = (int)(random() % commonViable.size());
+        it = commonViable.begin();
+    } else {
+        rand = (int)(random() % uncommonViable.size());
+        it = uncommonViable.begin();
+    }
+    advance(it, rand);
+    return *it;
 }
