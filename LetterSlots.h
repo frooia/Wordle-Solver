@@ -18,6 +18,4 @@ struct LetterSlots
 
 };
 
-//hit enter button, send feedback, return next guess
-//change feedback based on clicks
-//
+

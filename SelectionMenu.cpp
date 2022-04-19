@@ -5,6 +5,9 @@ SelectionMenu::SelectionMenu() {
 	instruction.setTexture(Texture::GetTexture("selectionInstruction"));
 	instruction.setPosition(400, 250);
 	enter.SetPosition(850, 500);
+	backButton.setTexture(Texture::GetTexture("back-button"));
+	backButton.setPosition(10, 10);
+	backButton.setScale(0.15, 0.15);
 	
 	for (int i = 5; i < 9; i++) {
 		menuButtons.push_back(MenuButton(650, 80 * i, i)); //450 + 200 * i
@@ -47,5 +50,9 @@ void SelectionMenu::DrawMenu(sf::RenderWindow& window) {
 	for (int i = 0; i < menuButtons.size(); i++) {
 		menuButtons[i].DrawMenuButton(window);
 	}
+}
+
+void SelectionMenu::DrawBack(sf::RenderWindow& window) {
+	window.draw(backButton);
 }
 

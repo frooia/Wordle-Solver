@@ -24,6 +24,10 @@ void EnterButton::PressButton() {
 	buttonPressed = true;
 }
 
+void EnterButton::UnpressButton() {
+	buttonPressed = false;
+}
+
 sf::FloatRect EnterButton::GetBounds() {
 	return pressed.getGlobalBounds();
 }

@@ -12,6 +12,7 @@ struct EnterButton
 	void CreateSprites();
 	void SetPosition(float x, float y);
 	void PressButton();
+	void UnpressButton();
 	sf::FloatRect GetBounds();
 	void DrawButton(sf::RenderWindow& window);
 

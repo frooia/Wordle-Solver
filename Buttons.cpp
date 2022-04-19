@@ -2,11 +2,12 @@
 
 Buttons::Buttons() {
 	buttons.resize(0);
-	
 }
 
 void Buttons::SetPositions(int wordLength) {
+	buttons.resize(0);
 	int x = 500;
+	//adjust location based on word length being showed
 	if (wordLength == 5)
 		x = 1060;
 	else if (wordLength == 6)

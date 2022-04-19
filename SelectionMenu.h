@@ -12,6 +12,7 @@ struct SelectionMenu
 	vector<MenuButton> menuButtons;
 	sf::Sprite instruction;
 	EnterButton enter;
+	sf::Sprite backButton;
 	int wordLength;
 	
 
@@ -20,6 +21,7 @@ struct SelectionMenu
 	bool SelectionFinalized();
 	void SetPressed(int index);
 	void DrawMenu(sf::RenderWindow& window);
+	void DrawBack(sf::RenderWindow& window);
 	
 
 };

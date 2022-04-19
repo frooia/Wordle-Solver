@@ -1,3 +1,5 @@
+//This class was implemented by Professor Fox at UF and shared with his COP3503 students in fall 2021 semester
+
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <unordered_map>

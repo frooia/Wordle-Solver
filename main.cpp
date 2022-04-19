@@ -39,6 +39,7 @@ int main()
 
                     if (menu.enter.GetBounds().contains(mousePosition)) {
                         menu.enter.PressButton();
+                        
                         squares.SetSize(menu.wordLength);
                         squares.SetGuess("LAUREN", currGuess);  //FIRST GUESS STRING HERE
                         buttons.SetPositions(menu.wordLength);
@@ -52,6 +53,12 @@ int main()
                         }
                     }
 
+                    if (menu.backButton.getGlobalBounds().contains(mousePosition)) {
+                        menuTime = true;
+                        menu.enter.UnpressButton();
+                        currGuess = 0;
+                    }
+
                     if (buttons.buttons[currGuess].GetBounds().contains(mousePosition)) {
                         bool feedbackChosen = true;
                         for (int j = 0; j < squares.slots[currGuess].size(); j++) {
@@ -61,7 +68,7 @@ int main()
                         }
                         if (feedbackChosen) {
                             buttons.buttons[currGuess].PressButton();
-                            squares.Feedback(currGuess++);
+                            squares.Feedback(currGuess++); //RETURNS FEEDBACK
                             if (currGuess < 6)
                                 squares.SetGuess("lauren", currGuess);  //SUBSEQUENT GUESSES
                             else
@@ -84,6 +91,7 @@ int main()
         else {
             squares.DrawSlots(window);
             buttons.DrawButtons(window);
+            menu.DrawBack(window);
         }
 
         window.display();

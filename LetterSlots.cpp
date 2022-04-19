@@ -8,10 +8,15 @@ LetterSlots::LetterSlots() {
 	header.setPosition(400, 0);
 }
 
+
 void LetterSlots::SetSize(int wordLength) {
 	//2D vector -- slots[row][column] --> row = guess #, column = word position
 	//leftAligns by wordlength --> 5 = 415; 6 = 365; 7 = 320; 8 = 255
-	int leftAlign;
+	slots.clear();
+	slots.resize(6);
+	
+	
+	int leftAlign = 0;
 	if (wordLength == 5)
 		leftAlign = 415;
 	else if (wordLength == 6)
@@ -49,6 +54,7 @@ vector<pair<char, int>> LetterSlots::Feedback(int guessNum){
 
 	return feedback;
 }
+
 
 void LetterSlots::DrawSlots(sf::RenderWindow& window) {
 	window.draw(header);
