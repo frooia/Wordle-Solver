@@ -77,6 +77,11 @@ void Set::update(const vector<pair<char, int>> &feedback) {
                 else
                     ++it;
             }
+            // Remove the guessed word
+            string guess;
+            for (auto & p : feedback)
+                guess.push_back(p.first);
+            fullSet.erase(guess);
         }
         // Gray
         else if (feedback[i].second == 3) {
