@@ -1,5 +1,6 @@
 #include "SelectionMenu.h"
 
+//initialize + set textures, positions, and scales + fill vector
 SelectionMenu::SelectionMenu() {	
 	wordLength = 0;
 	instruction.setTexture(Texture::GetTexture("selectionInstruction"));
@@ -15,6 +16,7 @@ SelectionMenu::SelectionMenu() {
 
 }
 
+//checks if any button is selected
 bool SelectionMenu::SelectionMade() {
 	bool selected = false;
 	for (int i = 0; i < menuButtons.size(); i++) {
@@ -25,6 +27,7 @@ bool SelectionMenu::SelectionMade() {
 	return selected;
 }
 
+//checks if a selection has been made and the enter button has been clicked
 bool SelectionMenu::SelectionFinalized() {
 	if (SelectionMade() && enter.buttonPressed)
 		return true;
@@ -32,6 +35,7 @@ bool SelectionMenu::SelectionFinalized() {
 		return false;
 }
 
+//selects clicked button, deselects others
 void SelectionMenu::SetPressed(int index) {
 	wordLength = index + 5;
 

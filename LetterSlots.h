@@ -13,7 +13,7 @@ struct LetterSlots
 	LetterSlots();
 	void SetSize(int wordLength);//resize slots vector, fill with tiles, 
 	void SetGuess(string word, int guessNum);
-	vector<pair<char, int>> Feedback(int guessNum);
+	vector<pair<char, int>> Feedback(int guessNum, vector <pair<char, int>>& feedback);
 	void DrawSlots(sf::RenderWindow& window);
 
 };
