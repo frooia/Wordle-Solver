@@ -19,7 +19,7 @@ void Buttons::SetPositions(int wordLength) {
 	
 	for (int i = 0; i < 6; i++) {
 		buttons.push_back(EnterButton());
-		buttons[i].SetPosition(x, 215 + 115 * i);
+		buttons[i].SetPosition(x, 230 + 115 * i);
 	}
 }
 

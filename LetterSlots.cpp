@@ -15,7 +15,7 @@ void LetterSlots::SetSize(int wordLength) {
 	slots.clear();
 	slots.resize(6);
 	
-	
+	//left Margin determined by wordLength to center images
 	int leftAlign = 0;
 	if (wordLength == 5)
 		leftAlign = 415;
@@ -33,6 +33,7 @@ void LetterSlots::SetSize(int wordLength) {
 	}
 }
 
+//changes letter value of the slots at appropriate guess number based on input string
 void LetterSlots::SetGuess(string word, int guessNum) {
 	
 	if (slots[guessNum].size() == word.size()) {
@@ -45,6 +46,7 @@ void LetterSlots::SetGuess(string word, int guessNum) {
 	}
 }
 
+//returns the feedback from user input of current guess
 vector<pair<char, int>> LetterSlots::Feedback(int guessNum){
 	vector<pair<char, int>> feedback;
 	for (int i = 0; i < slots[guessNum].size(); i++) {

@@ -8,7 +8,7 @@ Tile::Tile(float x, float y) {
 	CreateMap();
 	
 	color = 0;			//start off empty bg
-	letter = '*';		//w/ no letter
+	letter = '*';		//no letter
 	
 }
 
@@ -17,6 +17,7 @@ void Tile::CreateMap() {
 	char keyLetterLower = 'a';
 	char keyLetterUpper = 'A';
 
+	//not case sensitive
 	for (int i = 0; i < 26; i++) {
 		spriteLog[keyLetterLower] = letterSprites.at(i);
 		spriteLog[keyLetterUpper] = letterSprites.at(i);
@@ -92,7 +93,6 @@ void Tile::SetTextures() {
 	yellow.setTexture(Texture::GetTexture("yellow"));
 	gray.setTexture(Texture::GetTexture("gray"));
 	
-	
 
 	char textureLetter = 'a';
 
@@ -115,7 +115,6 @@ void Tile::SetScale() {
 	for (int i = 0; i < letterSprites.size(); i++) {
 		letterSprites.at(i).setScale(scale);
 	}
-	
 }
 
 //set all sprites to same position
@@ -137,10 +136,12 @@ void Tile::SwitchColor() {
 		color = 1;
 } 
 
+//changes letter based on char a-z
 void Tile::SetLetter(char _letter) {
 	letter = _letter;
-} //changes letter based on char a-z
+} 
 
+//global bounds of object = global bounds of one of the sprites
 sf::FloatRect Tile::GetBounds() {
 	return empty.getGlobalBounds();
 }

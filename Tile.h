@@ -8,16 +8,6 @@ using namespace std;
 
 struct Tile {
 
-	sf::Sprite empty;									
-	sf::Sprite gray;									
-	sf::Sprite yellow;									
-	sf::Sprite green;
-	vector<sf::Sprite> letterSprites;
-	
-	
-
-
-
 	unordered_map<char, sf::Sprite> spriteLog;
 
 	int color; //0 - empty, 1 - green, 2 - yellow, 3 - gray
@@ -36,5 +26,11 @@ private:
 	void CreateMap();
 	void FillSpriteVector();
 	void SetTextures();
+
+	sf::Sprite empty;
+	sf::Sprite gray;
+	sf::Sprite yellow;
+	sf::Sprite green;
+	vector<sf::Sprite> letterSprites;
 
 };
