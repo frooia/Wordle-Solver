@@ -18,7 +18,9 @@ bool GamePlay::MenuTime() {
 	return menuTime;
 }
 
-
+int GamePlay::WordLength() {
+	return menu.wordLength;
+}
 
 void GamePlay::ChooseWordLength(sf::Vector2f mousePosition) {
 	//checks if any wordlength button has been clicked, selects if yes
@@ -27,21 +29,21 @@ void GamePlay::ChooseWordLength(sf::Vector2f mousePosition) {
 			menu.SetPressed(i);
 		}
 	}
+}
 
+void GamePlay::FinalizeWordLength(sf::Vector2f mousePosition, string guess) {
 	//checks if enter has been pressed, presses button, sets up next screen and first guess
 	if (menu.enter.GetBounds().contains(mousePosition)) {
 		menu.enter.PressButton();
 
 		squares.SetSize(menu.wordLength);
-		squares.SetGuess("LAUREN", currGuess);  //FIRST GUESS STRING HERE
+		squares.SetGuess(guess, currGuess);  
 		buttons.SetPositions(menu.wordLength);
 		menuTime = false;
 	}
-	
 }
 
-
-void GamePlay::Play(sf::Vector2f mousePosition) {
+void GamePlay::Play(sf::Vector2f mousePosition, string guess, vector<pair<char,int>>& feedback) {
 	//switches color of clicked slot
 	for (int j = 0; j < squares.slots[currGuess].size(); j++) {
 		if (squares.slots[currGuess][j].GetBounds().contains(mousePosition)) {
@@ -69,9 +71,9 @@ void GamePlay::Play(sf::Vector2f mousePosition) {
 		//if all have feedback, returns it and sets next guess
 		if (feedbackChosen) {
 			buttons.buttons[currGuess].PressButton();
-			squares.Feedback(currGuess++); //RETURNS FEEDBACK
+			squares.Feedback(currGuess++, feedback); //RETURNS FEEDBACK
 			if (currGuess < 6)
-				squares.SetGuess("lauren", currGuess);  //SUBSEQUENT GUESSES
+				squares.SetGuess(guess, currGuess);  
 			else
 				gameOver = true;
 		}

@@ -24,10 +24,14 @@ int main()
                 sf::Vector2f mousePosition(sf::Mouse::getPosition(window).x, sf::Mouse::getPosition(window).y);
 
                 if (game.MenuTime()) {
-                    game.ChooseWordLength(mousePosition);                    
+                    game.ChooseWordLength(mousePosition);  
+                    //can get wordlength here for guess generation 
+                    //int len = game.WordLength()
+                    game.FinalizeWordLength(mousePosition, "LAUREN"); //FIRST GUESS STRING GOES HERE
                 }
                 else {
-                    game.Play(mousePosition);
+                    vector<pair<char, int>> feedback;
+                    game.Play(mousePosition, "LAUREN", feedback); //SUBSEQUENT GUESSES GO HERE
                 }
             }
         }

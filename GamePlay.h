@@ -12,15 +12,18 @@ class GamePlay
 	bool menuTime;
 	LetterSlots squares;
 	Buttons buttons;
-	SelectionMenu menu;
+	
 
 public:
+	SelectionMenu menu;
 	GamePlay();
 	bool GameOver();
 	bool MenuTime();
 	void ChooseWordLength(sf::Vector2f mousePosition);
-	void Play(sf::Vector2f mousePosition);
+	void FinalizeWordLength(sf::Vector2f mousePosition, string guess);
+	void Play(sf::Vector2f mousePosition, string guess, vector<pair<char,int>>& feedback);
 	void Draw(sf::RenderWindow& window);
+	int WordLength();
 
 };
 
