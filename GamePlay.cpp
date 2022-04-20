@@ -43,7 +43,7 @@ void GamePlay::FinalizeWordLength(sf::Vector2f mousePosition, string guess) {
 	}
 }
 
-void GamePlay::Play(sf::Vector2f mousePosition, string guess, vector<pair<char,int>>& feedback) {
+void GamePlay::GetFeedBack(sf::Vector2f mousePosition, vector<pair<char, int>>& feedback) {
 	//switches color of clicked slot
 	for (int j = 0; j < squares.slots[currGuess].size(); j++) {
 		if (squares.slots[currGuess][j].GetBounds().contains(mousePosition)) {
@@ -58,7 +58,6 @@ void GamePlay::Play(sf::Vector2f mousePosition, string guess, vector<pair<char,i
 		currGuess = 0;
 	}
 
-	
 	if (buttons.buttons[currGuess].GetBounds().contains(mousePosition)) {
 		//checks if all slots in current guess have received feedback
 		bool feedbackChosen = true;
@@ -68,17 +67,21 @@ void GamePlay::Play(sf::Vector2f mousePosition, string guess, vector<pair<char,i
 			}
 		}
 
-		//if all have feedback, returns it and sets next guess
 		if (feedbackChosen) {
 			buttons.buttons[currGuess].PressButton();
 			squares.Feedback(currGuess++, feedback); //RETURNS FEEDBACK
-			if (currGuess < 6)
-				squares.SetGuess(guess, currGuess);  
-			else
-				gameOver = true;
 		}
-
 	}
+}
+
+void GamePlay::SetNextGuess(string guess) {
+	//sets next guess
+		
+	if (currGuess < 6)
+		squares.SetGuess(guess, currGuess);  
+	else
+		gameOver = true;
+
 }
 
 void GamePlay::Draw(sf::RenderWindow& window) {

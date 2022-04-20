@@ -21,7 +21,8 @@ public:
 	bool MenuTime();
 	void ChooseWordLength(sf::Vector2f mousePosition);
 	void FinalizeWordLength(sf::Vector2f mousePosition, string guess);
-	void Play(sf::Vector2f mousePosition, string guess, vector<pair<char,int>>& feedback);
+	void GetFeedBack(sf::Vector2f mousePosition, vector<pair<char, int>>& feedback);
+	void SetNextGuess(string guess);
 	void Draw(sf::RenderWindow& window);
 	int WordLength();
 
