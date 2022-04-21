@@ -151,7 +151,7 @@ int main()
                                 // do trie stuff here
                                 nextGuess = trie.generateGuess(feedback);
                             }
-                            game.SetNextGuess(nextGuess);
+                            game.SetNextGuess(nextGuess, feedback);
                             feedback.resize(0);
                         }
                     }

@@ -29,7 +29,7 @@ public:
     void ReturnToMenu(sf::Vector2f mousePosition);
     bool MouseOnCurrentEnter(sf::Vector2f mousePosition);
 	bool GetFeedBack(sf::Vector2f mousePosition, vector<pair<char, int>>& feedback);
-	void SetNextGuess(const string& guess);
+	void SetNextGuess(const string& guess, vector<pair<char,int>>& feedback);
     bool AllGreen(vector<pair<char,int>>& feedback);
 	void Draw(sf::RenderWindow& window);
 	int WordLength();

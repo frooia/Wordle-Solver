@@ -96,9 +96,9 @@ bool GamePlay::GetFeedBack(sf::Vector2f mousePosition, vector<pair<char, int>>& 
     return feedbackChosen;
 }
 
-void GamePlay::SetNextGuess(const string& guess) {
+void GamePlay::SetNextGuess(const string& guess, vector<pair<char,int>>& feedback) {
 	//sets next guess
-	if (currGuess < 6) // TODO: check if it's not all green
+	if (currGuess < 6 && !AllGreen(feedback)) // TODO: check if it's not all green
 		squares.SetGuess(guess, currGuess);  
 	else
 		gameOver = true;
