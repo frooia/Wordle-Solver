@@ -164,11 +164,11 @@ int main()
         if (!game.GameOver()) {
             game.Draw(window);
         }
-        else if (game.GameOver() && currGuess >= 5) {
-            game.DrawLose();
+        else if (game.GameOver() && game.currGuess >= 5) {
+            game.DrawLose(window);
         }
         else {
-            game.DrawWin();
+            game.DrawWin(window);
         }
 
         window.display();

@@ -9,7 +9,6 @@ class GamePlay
 	
 	sf::Sprite gameOverScreen;
 	sf::Sprite winScreen;
-	int currGuess;
 	bool gameOver;
 	bool menuTime;
 	LetterSlots squares;
@@ -17,6 +16,7 @@ class GamePlay
 	
 
 public:
+    int currGuess;
 	SelectionMenu menu;
 	GamePlay();
 	bool GameOver();
