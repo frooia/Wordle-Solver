@@ -161,7 +161,15 @@ int main()
 
         window.clear(sf::Color::White);
 
-        game.Draw(window);
+        if (!game.GameOver()) {
+            game.Draw(window);
+        }
+        else if (game.GameOver() && currGuess >= 5) {
+            game.DrawLose();
+        }
+        else {
+            game.DrawWin();
+        }
 
         window.display();
     }

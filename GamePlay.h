@@ -7,6 +7,8 @@
 class GamePlay
 {
 	
+	sf::Sprite gameOverScreen;
+	sf::Sprite winScreen;
 	int currGuess;
 	bool gameOver;
 	bool menuTime;
@@ -33,6 +35,8 @@ public:
     bool AllGreen(vector<pair<char,int>>& feedback);
 	void Draw(sf::RenderWindow& window);
 	int WordLength();
+	void DrawWin(sf::RenderWindow& window);
+	void DrawLose(sf::RenderWindow& window);
 
 };
 

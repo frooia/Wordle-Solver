@@ -125,3 +125,11 @@ void GamePlay::Draw(sf::RenderWindow& window) {
 		menu.DrawBack(window);
 	}
 }
+
+void GamePlay::DrawWin(sf::RenderWindow& window) {
+    window.draw(winScreen);
+}
+
+void GamePlay::DrawLose(sf::RenderWindow& window) {
+    window.draw(gameOverScreen);
+}
