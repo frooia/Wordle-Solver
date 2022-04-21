@@ -2,7 +2,11 @@
 
 GamePlay::GamePlay() {
 
-	currGuess = 0;
+	gameOverScreen.setTexture(Texture::GetTexture("game-over"));
+    winScreen.setTexture(Texture::GetTexture("win"));
+    gameOverScreen.setPosition(500, 250);
+    winScreen.setPosition(500, 250);
+    currGuess = 0;
 	gameOver = false;
 	menuTime = true;
 	LetterSlots squares;
