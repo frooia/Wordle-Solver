@@ -48,7 +48,6 @@ void LetterSlots::SetGuess(string word, int guessNum) {
 
 //returns the feedback from user input of current guess
 vector<pair<char, int>> LetterSlots::Feedback(int guessNum, vector<pair<char,int>>& feedback){
-	feedback.resize(0);
 	for (int i = 0; i < slots[guessNum].size(); i++) {
 		pair<char, int> pair(slots[guessNum][i].letter, slots[guessNum][i].color);
 		feedback.push_back(pair);

@@ -20,9 +20,17 @@ public:
 	bool GameOver();
 	bool MenuTime();
 	void ChooseWordLength(sf::Vector2f mousePosition);
-	void FinalizeWordLength(sf::Vector2f mousePosition, string guess);
-	void GetFeedBack(sf::Vector2f mousePosition, vector<pair<char, int>>& feedback);
-	void SetNextGuess(string guess);
+    bool MouseOnMenu(sf::Vector2f mousePosition);
+    bool MouseOnEnter(sf::Vector2f mousePosition);
+    void SetFirstGuess(const string& guess);
+	void FinalizeWordLength(sf::Vector2f mousePosition);
+    void SwitchColor(sf::Vector2f mousePosition);
+    bool MouseOnBack(sf::Vector2f mousePosition);
+    void ReturnToMenu(sf::Vector2f mousePosition);
+    bool MouseOnCurrentEnter(sf::Vector2f mousePosition);
+	bool GetFeedBack(sf::Vector2f mousePosition, vector<pair<char, int>>& feedback);
+	void SetNextGuess(const string& guess);
+    bool AllGreen(vector<pair<char,int>>& feedback);
 	void Draw(sf::RenderWindow& window);
 	int WordLength();
 

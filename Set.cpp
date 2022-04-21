@@ -1,29 +1,29 @@
 //
 // Created by Lydia Chung on 4/19/22.
 //
-
 #include <unordered_set>
 #include <vector>
 #include <string>
 #include <utility>
+#include <iostream>
 
 using namespace std;
 
 class Set {
 private:
     unordered_set<string> fullSet;
-    int length;
     constexpr static const float COMMON_WORD_RATE = 0.8;
 public:
-    explicit Set(int wordLength);
-    void generate(const vector<string> &wordList);
-    void update(const vector<pair<char, int>>& feedback);
-    string randomGuess();
-    string nonRandomGuess(const unordered_set<string>& commonWords);
+    int length;
+    inline explicit Set(int wordLength);
+    inline void generate(const vector<string> &wordList);
+    inline void update(const vector<pair<char, int>>& feedback);
+    inline string randomGuess();
+    inline string nonRandomGuess(const unordered_set<string>& commonWords);
 };
 
 /**
- * Constructor
+ * Constructor with wordLength
  * @param wordLength
  */
 Set::Set(int wordLength) {
@@ -32,14 +32,13 @@ Set::Set(int wordLength) {
 }
 
 /**
- * Puts every word in wordList into the set at every index of fullSet
+ * Puts every word in wordList into fullSet
  * @param wordList
  */
 void Set::generate(const vector<string> &wordList) {
-    for (int i = 0; i < length; i++) {
-        for (auto & word : wordList) {
-            fullSet.insert(word);
-        }
+    fullSet.reserve(wordList.size());
+    for (const string& word : wordList) {
+        fullSet.insert(word);
     }
 }
 
@@ -53,10 +52,12 @@ void Set::update(const vector<pair<char, int>> &feedback) {
         if (feedback[i].second == 1) {
             // Remove every word that does not contain that letter at that location
             for (auto it = fullSet.begin(); it != fullSet.end(); ) {
-                if (it->at(i) != feedback[i].first)
-                    fullSet.erase(it);
-                else
+                string currWord = *it;
+                if (currWord[i] != feedback[i].first) {
+                    it = fullSet.erase(it);
+                } else {
                     ++it;
+                }
             }
         }
         // Yellow
@@ -87,10 +88,12 @@ void Set::update(const vector<pair<char, int>> &feedback) {
         else if (feedback[i].second == 3) {
             // Remove every word that contains that letter
             for (auto it = fullSet.begin(); it != fullSet.end(); ) {
-                if (it->find(feedback[i].first) != string::npos)
-                    fullSet.erase(it);
-                else
+                string currWord = *it;
+                if (currWord.find(feedback[i].first) != string::npos) {
+                    it = fullSet.erase(it);
+                } else {
                     ++it;
+                }
             }
         }
     }
