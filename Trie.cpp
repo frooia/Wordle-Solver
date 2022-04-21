@@ -30,7 +30,7 @@ Trie::Trie(int _wordLength)
 
     /*------------- Insert Words into Trie -------------*/
     // open word list file with correct size
-    string wordsFile = "../word lists/";
+    string wordsFile = "word lists/";
     char length = _wordLength + '0';
     wordsFile += length;
     wordsFile += "-letter-words.txt";
@@ -53,7 +53,7 @@ Trie::Trie(int _wordLength)
     inFile.clear();
 
     /*------------- Set Frequencies -------------*/
-    string freqFile = "../frequencies/";
+    string freqFile = "frequencies/";
     freqFile += length;
     freqFile += "-letter-frequencies.txt";
     inFile.open(freqFile);

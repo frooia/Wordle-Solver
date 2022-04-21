@@ -12,9 +12,9 @@ private:
     constexpr static const float COMMON_WORD_RATE = 0.8;
 public:
     int length;
-    explicit WordleGenerator(int _length);
-    static string randomWord(const vector<string>& wordList);
-    static string nonRandomWord(const vector<string>& allWords, const vector<string>& commonWords);
+    inline explicit WordleGenerator(int _length);
+    inline static string randomWord(const vector<string>& wordList);
+    inline static string nonRandomWord(const vector<string>& allWords, const vector<string>& commonWords);
 };
 
 /**

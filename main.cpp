@@ -7,6 +7,8 @@
 #include "SelectionMenu.h"
 #include "GamePlay.h"
 #include "Set.cpp"
+#include "Trie.h"
+#include "WordleGenerator.cpp"
 #include <fstream>
 
 vector<string> readWordList(int wordLength) {
@@ -20,14 +22,84 @@ vector<string> readWordList(int wordLength) {
     return ans;
 }
 
+vector<pair<char, int>> feedbackFromAns(string guess, string ans) {
+    vector<pair<char, int>> feedback;
+    feedback.reserve(guess.length());
+    for (char & c : guess) {
+        feedback.emplace_back(c, 0);
+    }
+    // Mark all the greens first
+    for (int i = 0; i < guess.length(); i++) {
+        if (guess[i] == ans[i])
+            feedback[i].second = 1;
+    }
+    // Mark yellows
+    for (int i = 0; i < guess.length(); i++) {
+        if (guess[i] != ans[i]) {
+            for (int j = 0; j < guess.length(); j++) {
+                if (i != j && guess[i] == ans[j]) {
+                    feedback[i].second = 2;
+                }
+            }
+        }
+    }
+    // Mark everything else gray
+    for (int i = 0; i < guess.length(); i++) {
+        if (feedback[i].second == 0)
+            feedback[i].second = 3;
+    }
+    return feedback;
+}
+
+void evaluate(int numSims, int length, const vector<string>& wordList) {
+    Set set(length);
+    set.generate(wordList);
+    int setSumGuessesNeeded = 0, trieSumGuessesNeeded = 0;
+    Trie trie(length);
+    WordleGenerator wg(length);
+    while (numSims-->0) {
+        string answer = wg.randomWord(wordList);
+        int guessCount = 0;
+        string guess;
+        // Use set to solve
+        while (guessCount < 6) {
+            guess = set.randomGuess();
+            if (guess == answer)
+                break;
+            vector<pair<char, int>> feedback = feedbackFromAns(guess, answer);
+            set.update(feedback);
+            guessCount++;
+        }
+        setSumGuessesNeeded += guessCount;
+
+        // Use trie to solve
+        guessCount = 0;
+        guess = trie.guessNoFeedback();
+        while (guessCount < 6) {
+            if (guess == answer)
+                break;
+            vector<pair<char, int>> feedback = feedbackFromAns(guess, answer);
+            guess = trie.generateGuess(feedback);
+            guessCount++;
+        }
+        trieSumGuessesNeeded += guessCount;
+    }
+    cout << "Average number of guesses required using Set: " << (double)setSumGuessesNeeded / (double)numSims << endl;
+    cout << "Average number of guesses required using Trie: " << (double)trieSumGuessesNeeded / (double)numSims << endl;
+}
+
 int main()
 {
+    // UNCOMMENT THIS OUT AND COMMENT OUT EVERYTHING ELSE TO COMPARE SET VS TRIE
+    // evaluate(1000, 5, readWordList(5));
+
     sf::RenderWindow window(sf::VideoMode(1500, 1000), "WORDLE SOLVER");
     GamePlay game = GamePlay();
     vector<string> wordList;
     Set set(5);
+    Trie trie(5);
     vector<pair<char, int>> feedback;
-    bool USE_SET = true;
+    bool USE_SET = false;
 
     while (window.isOpen())
     {
@@ -55,6 +127,8 @@ int main()
                             guess = set.randomGuess();
                         } else {
                             // do trie stuff here
+                            trie = Trie(len);
+                            guess = trie.guessNoFeedback();
                         }
                         game.SetFirstGuess(guess); //FIRST GUESS STRING GOES HERE
 
@@ -75,8 +149,10 @@ int main()
                                 nextGuess = set.randomGuess();
                             } else {
                                 // do trie stuff here
+                                nextGuess = trie.generateGuess(feedback);
                             }
                             game.SetNextGuess(nextGuess);
+                            feedback.resize(0);
                         }
                     }
                 }
