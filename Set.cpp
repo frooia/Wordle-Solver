@@ -5,13 +5,13 @@
 #include <vector>
 #include <string>
 #include <utility>
-#include <iostream>
+#include <set>
 
 using namespace std;
 
 class Set {
 private:
-    unordered_set<string> fullSet;
+    set<string> fullSet;
     constexpr static const float COMMON_WORD_RATE = 0.8;
 public:
     int length;
@@ -27,7 +27,6 @@ public:
  * @param wordLength
  */
 Set::Set(int wordLength) {
-    fullSet = unordered_set<string>();
     length = wordLength;
 }
 
@@ -36,7 +35,7 @@ Set::Set(int wordLength) {
  * @param wordList
  */
 void Set::generate(const vector<string> &wordList) {
-    fullSet.reserve(wordList.size());
+    //fullSet.reserve(wordList.size());
     for (const string& word : wordList) {
         fullSet.insert(word);
     }
